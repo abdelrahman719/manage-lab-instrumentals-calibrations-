@@ -1,0 +1,106 @@
+<%- include ('header.ejs') %>
+
+   <div class="container d-flex justify-content-center align-items-center ">
+
+      <form action="/addUser" method="post" class="form-box text-center  p-5 col-md-6 " action="">
+
+         <input required value="<%=InputsData.name%>" class="form-control rounded-pill  mt-5" type="text"
+            placeholder="user name" name="name" id="">
+         <% if (errorsArray.find( x=>x.param=="name")
+            ) { %>
+
+            <div class="text-center rounded-pill  font-monospace text-danger  ">Invalid Name</div>
+
+            <% } %>
+
+               <input required value="<%=InputsData.email%>" class="form-control mt-3 rounded-pill  " type="email"
+                  placeholder="E-mail" name="email" id="">
+               <% if (errorsArray.find( x=>x.param=="email")
+                  ) { %>
+
+                  <div class="text-center rounded-pill  font-monospace text-danger  ">Invalid e-mail</div>
+
+                  <% } %>
+                     <% if (oldUser ) { %>
+
+                        <div class="text-center rounded-pill  font-monospace text-danger">This Email already Sign up
+                        </div>
+
+                        <% } %>
+                           <div class="position-relative">
+
+                              <input inputmode="numeric" id="password" required value="<%=InputsData.password%>"
+                                 class="form-control rounded-pill mt-3" maxlength="4" type="password"
+                                 placeholder="PIN Code" name="password">
+                              <i class="bi bi-eye-slash" id="togglePassword"></i>
+                           </div>
+                           <% if (errorsArray.find( x=>x.param=="password")
+                              ) { %>
+
+                              <div class="text-center rounded-pill  font-monospace text-danger  ">Invalid PIN Code</div>
+
+                              <% } %>
+
+                                 <div class="position-relative">
+
+                                    <input inputmode="numeric" required class="form-control rounded-pill mt-3"
+                                       maxlength="4" type="password" placeholder="RE-PIN Code" name="repassword">
+                                    <i class="bi bi-eye-slash" id="togglePassword"></i>
+                                 </div>
+                                 <% if (errorsArray.find( x=>x.param=="repassword")
+                                    ) { %>
+
+                                    <div class="text-center rounded-pill  font-monospace text-danger  ">wrong PIN Code
+                                    </div>
+
+                                    <% } %>
+                                       <div class="form-check w-50 m-auto mt-3 row ">
+                                          <div class="col-md-12 radios-box">
+                                             <input checked value="analyst" class="form-check-input" type="radio"
+                                                name="role" id="analyst">
+                                             <label class="form-check-label" for="analyst">
+                                                Analyst
+                                             </label>
+                                          </div>
+
+
+                                          <div class="col-md-12 radios-box">
+                                             <input value="supervisor" class="form-check-input " type="radio"
+                                                name="role" id="supervisor">
+                                             <label class="form-check-label" for="supervisor">
+                                                supervisor
+                                             </label>
+                                          </div>
+
+
+                                       </div>
+                                       <button class="btn login-btn mt-3 col-md-4  rounded-pill" type="submit">Sign UP</button>
+                                       <br>
+                                       <a class="btn btn-outline-warning col-md-4  mt-3  rounded-pill" href="/">Log In ?</a>
+      </form>
+
+
+   </div>
+
+   <script>
+
+      const togglePassword = document.querySelector("#togglePassword");
+      const password = document.querySelector("#password");
+
+      togglePassword.addEventListener("click", function () {
+         // toggle the type attribute
+         const type = password.getAttribute("type") === "password" ? "text" : "password";
+         password.setAttribute("type", type);
+
+         // toggle the icon
+         this.classList.toggle("bi-eye");
+      });
+   </script>
+
+
+   <script src="js/popper.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+
+   </body>
+
+   </html>

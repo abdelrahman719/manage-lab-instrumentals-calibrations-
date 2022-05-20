@@ -1,0 +1,170 @@
+<%- include("header.ejs") %>
+
+
+   
+
+    <h2 class="text-center text-info"> Hello : <span class="text-danger">
+            <%= userName %>
+        </span> </h2>
+    <h2 class="text-center text-info">Manage Your Instrumentals</h2>
+
+    <header class=" m-auto my-3 col-md-8 home-header ">
+        <form class="w-50 m-auto my-border p-5 text-center" method="post" action="/addInst">
+
+
+            <label  class="form-label" for="inst-name">Inst. Name</label>
+            <input class=" form-control " type="text" name="inst-name" id="inst-name">
+
+            <label  class="form-label" for="inst-code">Inst. code</label>
+            <input class=" form-control " type="text" name="inst-code" id="inst-code">
+
+            <label  class="form-label" for="cal-date">Calibration Date</label>
+            <input required class="form-control" type="date" name="cal-date" id="cal-date">
+
+            <label  class="form-label" for="cal-period">Calibration Period</label>
+
+            <select class="form-select" name="cal-period" id="cal-period">
+                <option value="3Months"> 3 Months</option>
+                <option value="6Months"> 6 Months</option>
+                <option value="12Months" selected> 12 Months</option>
+            </select>
+
+
+            <label  class="form-label" for="cal-by">Calibration done By ? </label>
+            <select class="form-select" name="cal-by" id="cal-by">
+                <option value="External" selected> External</option>
+                <option value="Engineering">Engineering</option>
+
+            </select>
+
+
+            <button type="submit"
+                class=" btn btn-outline-primary col-md-6  text-center mt-3 px-5 py-2 rounded-pill">Add</button>
+            <br>
+            <a class="btn btn-outline-danger col-md-6 rounded-pill mt-3" href="/gn">Generat Your Report</a>
+            <br>
+
+            <a class="btn btn-outline-warning col-md-6  rounded-pill mt-3" href="/logout">Log out</a>
+        </form>
+    </header>
+    <div class="container border-top py-5">
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Deleting Confirmation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Do you want to delete this Instrmental &#128533; ?
+                    </div>
+                    <div class="modal-footer">
+                        <form method="post" action="/del">
+                            <input type="text" class="d-none" name="hiddenID" id="hiddenIDinput">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger">yes Delete.</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table id="example" class="table  my-3 table-striped">
+            <thead class="bg-thead text-white">
+                <tr>
+                    <th>No</th>
+                    <th>Instrumental Name</th>
+                    <th>Code</th>
+                    <th>calibration Date</th>
+                    <th>Next calibration</th>
+                    <th>Deadline in Days</th>
+                    <th>By</th>
+                    <th> </th>
+                    <th> </th>
+
+                </tr>
+            </thead>
+            <tbody id="myTable">
+
+                <% for(let i=0 ; i<Instrumentals.length ;i++){ %>
+
+
+
+
+                    <tr id="row<%=i%>" class="  p-5  ">
+
+                        <td>
+                            <%= i+1 %>
+                        </td>
+                        <td>
+
+                            <%= Instrumentals[i].instName %>
+                        </td>
+                        <td>
+                            <%= Instrumentals[i].instCode %>
+                        </td>
+                        <td class=" " id="saveForm<%=i%>">
+                            <form class="text-center" onsubmit="save('<%=i%>')" method="post"
+                                action="/saveEdit/<%= Instrumentals[i]._id %>">
+
+
+                                <input disabled name="cal-date" class="text-dark border-0 px-3 " id="calDateInput<%=i%>"
+                                    type="date" value="<%= Instrumentals[i].calDate %>">
+
+                                <button type="submit" id="save<%=i%>"
+                                    class="btn btn-outline-info  d-none   save-btn  ">Save</button>
+                            </form>
+                        </td>
+                        <td>
+                            <%= Instrumentals[i].nextCalDate %>
+
+
+
+
+
+                        </td>
+                        <td>
+                            <% if ( Instrumentals[i].deadline>0) { %>
+                                <span id="deadline-days" class="text-green days-size ">
+                                    <%= Instrumentals[i].deadline %>
+                                </span>
+
+                                <% } %>
+                                    <% if ( Instrumentals[i].deadline<=0) { %>
+                                        <span id="deadline-days" class="text-danger days-size  ">
+                                            <%= Instrumentals[i].deadline %>
+                                        </span>
+
+                                        <% } %>
+
+                        </td>
+                        <td>
+                            <%= Instrumentals[i].calBy %>
+                        </td>
+
+                        <td><a onclick="edit('<%=i%>')" id="edit<%=i%>"
+                                class="btn edit-btn tabel-btn  rounded-pill  px-3 btn-outline-info">Edit</a>
+
+                           
+                        </td>
+                        <td>
+                            <a onclick="getID('<%= Instrumentals[i]._id %>')" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"
+                                class="btn rounded-pill tabel-btn  px-3 btn-outline-danger">Delete</a>
+                        </td>
+
+
+                    </tr>
+
+
+
+                    <% } %>
+            </tbody>
+
+        </table>
+    </div>
+
+
+    <%- include("footer.ejs") %>

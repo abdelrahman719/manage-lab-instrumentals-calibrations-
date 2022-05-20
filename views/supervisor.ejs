@@ -1,0 +1,92 @@
+<%- include("header.ejs") %>
+
+<h2 class="text-center text-info"> Hello : <span class="text-danger"> <%= userName %> </span> </h2>
+    
+
+    <header class=" my-border p-5 m-auto my-3 w-75 ">
+        <div class="">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class=" text-danger"> Please insert your team member's e-mail to get your report  </h6>
+                        <form class="px-3 mb-3 " action="/addTeamMembers" method="post">
+                            <input required  class="form-control mt-3 rounded-pill " type="email"
+                            placeholder="Team Member E-mail" name="memberEmail" id="">
+                            <button class="btn mt-3 btn-outline-info rounded-pill" type="submit">Get Report</button>
+                            <a class="btn btn-outline-warning  rounded-pill mt-3" href="/logout">Log out</a>
+                        </form>
+
+                </div>
+                <div class="col-md-6">
+                    <form class="px-3" action="/addNote" method="post" >
+                        <h5 class="text-danger">Add your notes here ...</h5>
+                        <textarea id="noteArea" disabled required   class="form-control mt-3 rounded-3  " style="resize:none"
+                       value="asc" name="note" id=""> <%= Notes %> </textarea>
+                        <button onclick="saveAndDisabled()" type="submit" class="btn mt-3 btn-outline-dark  rounded-pill">Save note</button>
+                        <button onclick="enableToEdit()" type="button" class="btn mt-3 btn-outline-danger  rounded-pill" >Edite note</button>
+            
+                    </form>
+
+                </div>
+            </div>
+        </div>
+      
+     
+     
+       
+    </header>
+
+    <div class="container border-top py-5">
+        <table id="example" class="table  my-3 table-striped">
+            <thead class="bg-thead text-white">
+                <tr>
+                    <th>No</th>
+                    <th>Instrumental Name</th>
+                    <th>Code</th>
+                    <th>Next calibration</th>
+                    <th>By</th>
+
+                </tr>
+            </thead>
+            <tbody id="myTable">
+
+                <% for(let i=0 ; i<Instrumentals.length ;i++){ %>
+
+
+
+
+                    <tr id="row<%=i%>" class="  p-5  ">
+
+                        <td>
+                            <%= i+1 %>
+                        </td>
+                        <td>
+
+                            <%= Instrumentals[i].instName %>
+                        </td>
+                        <td>
+                            <%= Instrumentals[i].instCode %>
+                        </td>
+            
+                        <td>
+                            <%= Instrumentals[i].nextCalDate %>
+                        </td>
+               
+                        <td>
+                            <%= Instrumentals[i].calBy %>
+                        </td>
+
+                     
+
+
+                    </tr>
+
+
+
+                    <% } %>
+            </tbody>
+
+        </table>
+    </div>
+
+
+    <%- include("footer.ejs") %>

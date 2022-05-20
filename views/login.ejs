@@ -1,0 +1,79 @@
+<%- include ('header.ejs') %>
+
+   
+
+    <div class="container d-flex justify-content-center align-items-center ">
+
+        <form class="form-box text-center  p-5 col-md-6 " method="post" action="/access_acount">
+            <input required value="<%=InputsData.email%>" class="form-control
+             rounded-pill  mt-5" type="email" placeholder="E-mail" name="email" id="">
+
+            <% if (errorsArray.find( x=>x.param=="email")
+                ) { %>
+
+                <div class="text-center m-auto w-50  font-monospace text-danger  ">Invalid e-mail</div>
+
+                <% } %>
+                    <% if (userNotfound ) { %>
+
+                        <div class="text-center m-auto w-50  font-monospace text-danger  ">user not found please check
+                            your email</div>
+
+                        <% } %>
+                            <div class="position-relative">
+
+
+                                <input inputmode="numeric" id="password2" required value="<%=InputsData.password%>"
+                                    class="form-control rounded-pill mt-3" maxlength="4" type="password"
+                                    placeholder="PIN Code" name="password">
+
+                                <i class="bi bi-eye-slash" id="togglePassword2"></i>
+                            </div>
+                            <% if (wrongpass ) { %>
+
+                                <div class="text-center rounded-pill  font-monospace text-danger">Wrong PIN</div>
+
+                                <% } %>
+                                    <button class="btn mt-3 login-btn  col-md-4  rounded-pill" type="submit">Login</button>
+                                    <br>
+                                    <a class="btn btn-outline-warning mt-3 col-md-4  rounded-pill" type="button"
+                                        href="/signup">Sign up ?</a>
+        </form>
+
+
+    </div>
+
+
+    <script>
+
+        const togglePassword2 = document.querySelector("#togglePassword2");
+        const password2 = document.querySelector("#password2");
+
+
+        togglePassword2.addEventListener("click", function () {
+            // toggle the type attribute
+            const type2 = password2.getAttribute("type") === "password" ? "text" : "password";
+            password2.setAttribute("type", type2);
+
+            // toggle the icon
+            this.classList.toggle("bi-eye");
+        });
+
+
+        function convertType() {
+            //  const type2 = password2.getAttribute("type") === "password" ? "text" : "password";
+            password2.setAttribute("type", "password");
+
+        }
+
+
+
+    </script>
+
+
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    </body>
+
+    </html>

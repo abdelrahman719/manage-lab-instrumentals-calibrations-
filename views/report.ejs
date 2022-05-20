@@ -1,0 +1,28 @@
+<%- include("header.ejs") %>
+<div class="container  m-auto text-center py-2">
+    <h1 class="text-center text-secondary font-monospace ">our instrumentals report</h1>
+    <a class="font-monospace btn btn-secondary mb-3 " href="/InstPage"> <<< Back</a>
+
+    <div class="row   justify-content-center ">
+        <% for( let i = 0; i < upcomingInst.length; i++ ) { %>
+
+        <div class="col-md-3 m-1 text-center my-border py-2">
+
+
+            <h3 class="text-danger"><%= i+1 %>-   <%= upcomingInst[i].nextCalDate %> </h3>
+            <h3 class="text-primary"><%= upcomingInst[i].instName%> </h3>
+            <h4 class="text-info"> <%= upcomingInst[i].instCode%> </h4>
+            <h4> By :  <%= upcomingInst[i].calBy %></h4>
+
+
+
+                
+                
+        </div>
+        <% } %>
+
+    </div>
+
+
+</div>
+<%- include("footer.ejs") %>
