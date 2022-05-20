@@ -12,7 +12,7 @@ Use node package manager to install the run by "nodemon app.js"
 
 Node JS , Express.js , MongoDB , ejs template engine
 ## modules like
-Mongoose ,Express-validator , Express-session , connect-flash and node mailer
+Mongoose ,bcrypt ,Express-validator , Express-session , connect-flash and nodemailer
 
 
 
