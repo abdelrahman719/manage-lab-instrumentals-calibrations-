@@ -11,7 +11,7 @@ signup.get("/signup", (req, res) => {
 })
 signup.post("/addUser",addingUserController.validateInputs , addingUserController.addUser )
 
-signup.post("/confirmMail/:email" , addingUserController.Confirmation )
+signup.get("/confirmMail/:email" , addingUserController.Confirmation )
 
 
 

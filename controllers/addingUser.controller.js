@@ -38,11 +38,11 @@ module.exports.addUser =
           subject: "E-mail Activation ✔", // Subject line
           text: " Welcome to your team ", // plain text body
           html: `<body>
-          <form method="post" action="http://${theUrl}/confirmMail/${email}"
+          <div
           style="background-color: coral; text-align: center; padding: 5vw; width: 75%; margin: auto;">
           <h2>Follow next Link to confirm your mail 😉 </h2>
-          <button type="submit" style="font-size: larger; font-weight: bolder;">Click here </button>
-      </form>
+          <a href="http://${theUrl}/confirmMail/${email}" style="color:white; padding:5px; font-size: larger; font-weight: bolder;border:solid 5px">Click here </a>
+      </div>
                 </body>`, // html body
         });
         bcrypt.hash(password, 4, async (err, hash) => {
