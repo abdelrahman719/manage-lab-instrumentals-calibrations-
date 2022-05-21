@@ -4,7 +4,8 @@ is an app help to keep track due dates of instrumentals calibrations in labs and
 
 ## Installation
 
-Use node package manager to install the run by "nodemon app.js"
+Use node package manager to install "npm init " => "npm i "
+then run project by "nodemon app.js"
 
 
 ```
