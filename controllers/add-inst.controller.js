@@ -26,7 +26,7 @@ module.exports=async (req, res) => {
     }
     else if (req.body["cal-period"] == "12Months") {
         let caldate = new Date(req.body["cal-date"]);
-        caldate.setDate(caldate.getDate() + 360);
+        caldate.setDate(caldate.getDate() + 365);
         instInfo.nextCalDate = caldate.toISOString().substring(0, 10);
     }
 
